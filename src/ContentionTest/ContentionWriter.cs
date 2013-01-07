@@ -31,13 +31,11 @@ namespace ContentionTest
 
         public Task WriteAsync(byte[] buffer)
         {
-            //Thread.Sleep(100);
             var random = new Random();
             _fileName = GetFileName();
             _stream = new FileStream(_fileName, FileMode.Create);
             _stopwatch.Start();
             return Task.Factory.FromAsync(_stream.BeginWrite, _stream.EndWrite, buffer, random.Next(_howMuch), _howMuch, null);
-            //return Task.Factory.StartNew(() => _stream.Write(buffer, random.Next(_howMuch), _howMuch));
         }
 
         public void Write(byte[] buffer)
@@ -50,8 +48,6 @@ namespace ContentionTest
 
         private string GetFileName()
         {
-            //return Path.GetTempFileName();
-            //return "k:\\" + Guid.NewGuid().ToString("N");
             return "c:\\temp\\" + Guid.NewGuid().ToString("N");
         }
 
